@@ -16,16 +16,21 @@ then
     exit 1
 fi
 
+#$HOME/qemu/bin/qemu-system-aarch64 \
+
 qemu-system-aarch64 \
     -machine virt \
-    -cpu cortex-a57 \
+    -cpu cortex-a53 \
     -m 1G \
+    -drive media=disk,index=0,format=raw,file=$DISK_IMG \
     -drive if=pflash,format=raw,readonly,file=$DEVENV_DIR/$ARCH/OVMF_CODE.fd \
-    -drive if=pflash,format=raw,file=$DEVENV_DIR/$ARCH/OVMF_VARS.fd \
-    -drive format=raw,file=$DISK_IMG \
     -device nec-usb-xhci,id=xhci \
     -device usb-mouse \
     -device usb-kbd \
     -monitor stdio \
     -device ramfb \
     $QEMU_OPTS
+
+
+    #-cpu cortex-a57 \
+    #-drive if=pflash,format=raw,file=$DEVENV_DIR/$ARCH/OVMF_VARS.fd \
