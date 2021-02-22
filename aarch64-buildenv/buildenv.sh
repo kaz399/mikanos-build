@@ -18,7 +18,7 @@ if [[ ! -d "osbook" ]] ; then
 fi
 
 if [[ ! -d "mikanos" ]] ; then
-    git clone https://github.com/kaz399/mikanos.git        mikanos -b local/aarch64-usb
+    git clone https://github.com/kaz399/mikanos-aarch64.git mikanos -b local/aarch64
 fi
 
 if [[ ! -d "freetype2" ]] ; then
