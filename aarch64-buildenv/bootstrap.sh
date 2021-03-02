@@ -49,6 +49,11 @@ if ! which aarch64-none-linux-gnu-gcc ; then
     fi
 fi
 
+if [[ ! -f "${DOWNLOAD_DIR}/x86_64-elf.tar.gz" ]] ; then
+    echo "downloading libraries for x86_64"
+    wget -P "${DOWNLOAD_DIR}" https://github.com/uchan-nos/mikanos-build/releases/download/v2.0/x86_64-elf.tar.gz
+fi
+
 # build environment settings
 
 DEVENV_DIR=$(pwd)/osbook/devenv/aarch64-linux-gnu
@@ -78,6 +83,9 @@ if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu-gcc" ]] ; then
     fi
 fi
 
+if [[ ! -d "./osbook/devenv/x86_64-elf" ]] ; then
+    tar xvf "${DOWNLOAD_DIR}/x86_64-elf.tar.gz" -C ./osbook/devenv
+fi
 echo "export PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu-gcc/bin:${PATH}\"" > ${HOME}/.mikanos.toolchain_path
 
 . ${HOME}/.mikanos.toolchain_path
@@ -136,6 +144,11 @@ cp ../osbook/aarch64-buildenv/seabios.config .config
 make
 cp ./out/vgabios.bin vgabios-ramfb.bin
 popd
+
+
+# copy activate.sh
+
+cp ./osbook/aarch64-buildenv/activate.sh ./
 
 echo "complete"
 
