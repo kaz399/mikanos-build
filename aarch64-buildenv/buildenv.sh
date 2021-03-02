@@ -10,7 +10,7 @@ fi
 # get source code and binaries
 
 if [[ ! -d "edk2" ]] ; then
-    git clone https://github.com/tianocore/edk2.git        edk2
+    git clone https://github.com/tianocore/edk2.git edk2
 fi
 
 if [[ ! -d "osbook" ]] ; then
@@ -22,11 +22,15 @@ if [[ ! -d "mikanos" ]] ; then
 fi
 
 if [[ ! -d "freetype2" ]] ; then
-    git clone https://github.com/freetype/freetype2.git    freetype2
+    git clone https://github.com/freetype/freetype2.git freetype2
 fi
 
 if [[ ! -d "musl" ]] ; then
-    git clone git://git.musl-libc.org/musl                 musl
+    git clone git://git.musl-libc.org/musl musl
+fi
+
+if [[ ! -d "seabios" ]] ; then
+    git clone https://git.seabios.org/seabios.git seabios
 fi
 
 #if [[ ! -f "${DOWNLOAD_DIR}/musl-1.2.2.tar.gz" ]] ; then
@@ -122,6 +126,15 @@ dd if=./Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_VARS.fd of=${D
 
 ln -s ../mikanos/MikanLoaderPkg .
 
+popd
+
+# seabios
+
+pushd seabios
+git clean -dfx
+cp ../osbook/aarch64-buildenv/seabios.config .config
+make
+cp ./out/vgabios.bin vgabios-ramfb.bin
 popd
 
 echo "complete"
