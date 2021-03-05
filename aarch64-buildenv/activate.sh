@@ -2,6 +2,16 @@
 # deactivate
 
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+TARGET_ARCH=${1:-aarch64}
+
+if [ -n "${1}" ] ; then
+    shift
+fi
+
+if [ ! -s "${SCRIPT_DIR}/osbook/devenv/buildenv-${TARGET_ARCH}.sh" ] ; then
+    echo "ERROR: ${TARGET_ARCH} is not supported"
+    return
+fi
 
 function deactivate () {
     echo deactivate
@@ -90,6 +100,6 @@ pushd . > /dev/null
 \cd ${SCRIPT_DIR}/edk2
 source ./edksetup.sh
 \cd ${SCRIPT_DIR}/osbook
-source ./devenv/buildenv.sh
+source ./devenv/buildenv-${TARGET_ARCH}.sh
 
 popd > /dev/null
