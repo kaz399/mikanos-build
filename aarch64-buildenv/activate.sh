@@ -84,6 +84,7 @@ esac
 ORIG_PATH=${PATH}
 export PATH=${ORIG_PATH}:${SCRIPT_DIR}/osbook/devenv/
 export MIKANOS_COMPILEDB=${SCRIPT_DIR}/mikanos/compile_commands.json
+export QEMU_LIBPATH="-L ${SCRIPT_DIR}/seabios"
 
 alias edk="cd ${SCRIPT_DIR}/edk2"
 alias osb="cd ${SCRIPT_DIR}/osbook"

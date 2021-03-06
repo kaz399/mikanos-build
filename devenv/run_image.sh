@@ -23,4 +23,5 @@ qemu-system-x86_64 \
     -device nec-usb-xhci,id=xhci \
     -device usb-mouse -device usb-kbd \
     -monitor stdio \
-    $QEMU_OPTS
+    $QEMU_OPTS \
+    $QEMU_LIBPATH

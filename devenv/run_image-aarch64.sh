@@ -29,7 +29,8 @@ qemu-system-aarch64 \
     -device usb-kbd \
     -monitor stdio \
     -device ramfb \
-    $QEMU_OPTS
+    $QEMU_OPTS \
+    $QEMU_LIBPATH
 
 
     #-cpu cortex-a57 \
