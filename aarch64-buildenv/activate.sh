@@ -69,7 +69,7 @@ case ${BASH}${ZSH_NAME} in
         function __set_prompt_osdev () {
             PS1=${ORIG_PS1}
             ${ORIG_PROMPT_COMMAND}
-            PS1="\[\e[1;34m\](osdev-aarch64)\[\e[m\]:${PS1}"
+            PS1="\[\e[1;34m\](osdev-${TARGET_ARCH})\[\e[m\]:${PS1}"
         }
 
         PROMPT_COMMAND=__set_prompt_osdev
