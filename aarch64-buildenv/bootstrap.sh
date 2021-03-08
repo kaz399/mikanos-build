@@ -73,9 +73,9 @@ mkdir -p "${DEVENV_DIR}"
 if [[ ! -d "clang+llvm-11.0.0-aarch64-linux-gnu" ]] ; then
     tar xvf "${DOWNLOAD_DIR}"/clang+llvm-11.0.0-aarch64-linux-gnu.tar.xz
 fi
-    cd "${WORKDIR}"/clang+llvm-11.0.0-aarch64-linux-gnu
-    cp -vr * "${DEVENV_DIR}"
-    cd "${WORKDIR}"
+cd "${WORKDIR}"/clang+llvm-11.0.0-aarch64-linux-gnu
+cp -vr * "${DEVENV_DIR}"
+cd "${WORKDIR}"
 
 if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu" ]] ; then
     if [[ ! -d "gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu" ]] ; then
@@ -87,6 +87,7 @@ if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu" ]] ; then
         cd "${WORKDIR}"
     fi
 fi
+cp -v "${TOOLCHAIN_DIR}/aarch64-linux-gnu/lib/gcc/aarch64-none-linux-gnu/10.2.1/libgcc.a" "${DEVENV_DIR}/lib/libgcc.a"
 
 if [[ ! -d "${WORKDIR}/osbook/devenv/x86_64-elf" ]] ; then
     tar xvf "${DOWNLOAD_DIR}/x86_64-elf.tar.gz" -C "${WORKDIR}"/osbook/devenv
@@ -104,7 +105,7 @@ echo "export AARCH64_GCC_PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu/"\" >> ${HOME
 #tar xvf "${DOWNLOAD_DIR}"/musl-1.2.2.tar.gz
 cd "${WORKDIR}"/musl
 git clean -dfx
-./configure --target=aarch64-linux-gnu --disable-shared --prefix=${DEVENV_DIR}
+./configure --target=aarch64-linux-gnu --disable-shared --prefix="${DEVENV_DIR}"
 make -j${CPUS} install
 
 # freetype2
@@ -112,7 +113,7 @@ make -j${CPUS} install
 cd "${WORKDIR}"/freetype2
 git clean -dfx
 ./autogen.sh
-./configure --target=aarch64-linux-gnu --disable-shared --prefix=${DEVENV_DIR}
+./configure --target=aarch64-linux-gnu --disable-shared --prefix="${DEVENV_DIR}"
 make -j${CPUS} install
 
 # edk2
@@ -131,10 +132,10 @@ set -u
 BUILD_COMPILER=CLANG38
 export ${BUILD_COMPILER}_AARCH64_PREFIX=aarch64-linux-gnu-
 build -a AARCH64 -t ${BUILD_COMPILER} -p ArmVirtPkg/ArmVirtQemu.dsc
-dd if=/dev/zero of=${DEVENV_DIR}/OVMF_CODE.fd bs=1M count=64
-dd if="${WORKDIR}"/edk2/Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_EFI.fd of=${DEVENV_DIR}/OVMF_CODE.fd conv=notrunc
-dd if=/dev/zero of=${DEVENV_DIR}/OVMF_VARS.fd bs=1M count=64
-dd if="${WORKDIR}"/edk2//Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_VARS.fd of=${DEVENV_DIR}/OVMF_VARS.fd conv=notrunc
+dd if=/dev/zero of="${DEVENV_DIR}/OVMF_CODE.fd" bs=1M count=64
+dd if="${WORKDIR}"/edk2/Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_EFI.fd of="${DEVENV_DIR}/OVMF_CODE.fd" conv=notrunc
+dd if=/dev/zero of="${DEVENV_DIR}/OVMF_VARS.fd" bs=1M count=64
+dd if="${WORKDIR}"/edk2//Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_VARS.fd of="${DEVENV_DIR}/OVMF_VARS.fd" conv=notrunc
 
 ln -s ../mikanos/MikanLoaderPkg .
 
