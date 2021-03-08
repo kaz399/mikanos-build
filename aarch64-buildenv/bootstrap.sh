@@ -2,11 +2,6 @@
 
 WORKDIR="$(pwd)"
 
-if [[ -n "${MIKANOS_BUILDENV_ACTIVATED}" ]] ; then
-    echo 'deactivate'
-    deactivate
-fi
-
 TOOLCHAIN_DIR=${1:-${HOME}/.mikanos.toolchain}
 DOWNLOAD_DIR=${2:-"${WORKDIR}"/downloads}
 

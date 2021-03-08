@@ -85,8 +85,8 @@ esac
 
 # misc
 
-MIKANOS_BUILDENV_ACTIVATED=1
-ORIG_PATH=${PATH}
+export MIKANOS_BUILDENV_ACTIVATED=1
+export ORIG_PATH=${PATH}
 export PATH=${ORIG_PATH}:${SCRIPT_DIR}/osbook/devenv/
 export MIKANOS_COMPILEDB=${SCRIPT_DIR}/mikanos/compile_commands.json
 export QEMU_LIBPATH="-L ${SCRIPT_DIR}/seabios"
