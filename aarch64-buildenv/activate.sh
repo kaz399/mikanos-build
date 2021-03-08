@@ -77,7 +77,7 @@ case ${BASH}${ZSH_NAME} in
     *zsh* )
         ORIG_PROMPT=${PROMPT}
         ACTIVATE_DIR=$(pwd)
-        export PROMPT="osdev:%F{cyan}(osdev-aarch64)%f:${ORIG_PROMPT}"
+        export PROMPT="osdev:%F{cyan}(osdev-${TARGET_ARCH})%f:${ORIG_PROMPT}"
         ;;
 esac
 
