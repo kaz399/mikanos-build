@@ -77,11 +77,11 @@ if [[ ! -d "clang+llvm-11.0.0-aarch64-linux-gnu" ]] ; then
     cd "${WORKDIR}"
 fi
 
-if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu-gcc" ]] ; then
+if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu" ]] ; then
     if [[ ! -d "gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu" ]] ; then
         tar xvf "${DOWNLOAD_DIR}"/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu.tar.xz -C "${TOOLCHAIN_DIR}"
         cd  "${TOOLCHAIN_DIR}"
-        ln -s gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu aarch64-linux-gnu-gcc
+        ln -s gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu aarch64-linux-gnu
         cd aarch64-linux-gnu-gcc/bin/
         for file in aarch64-none-linux-gnu-*; do ln -s $file $(echo $file | sed -e 's/-none//g'); done
         cd "${WORKDIR}"
@@ -91,8 +91,8 @@ fi
 if [[ ! -d "${WORKDIR}/osbook/devenv/x86_64-elf" ]] ; then
     tar xvf "${DOWNLOAD_DIR}/x86_64-elf.tar.gz" -C "${WORKDIR}"/osbook/devenv
 fi
-echo "export PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu-gcc/bin:\${PATH}\"" > ${HOME}/.mikanos.toolchain_path
-echo "export MIKANOS_TOOLCHAIN_PATH=\"${TOOLCHAIN_DIR}\"" >> ${HOME}/.mikanos.toolchain_path
+echo "export PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu/bin:\${PATH}\"" > ${HOME}/.mikanos.toolchain_path
+echo "export AARCH64_GCC_PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu/"\" >> ${HOME}/.mikanos.toolchain_path
 
 . ${HOME}/.mikanos.toolchain_path
 
