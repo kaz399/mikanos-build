@@ -93,7 +93,6 @@ if [[ ! -d "${WORKDIR}/osbook/devenv/x86_64-elf" ]] ; then
     tar xvf "${DOWNLOAD_DIR}/x86_64-elf.tar.gz" -C "${WORKDIR}"/osbook/devenv
 fi
 echo "export PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu/bin:\${PATH}\"" > ${HOME}/.mikanos.toolchain_path
-echo "export AARCH64_GCC_PATH=\"${TOOLCHAIN_DIR}/aarch64-linux-gnu/"\" >> ${HOME}/.mikanos.toolchain_path
 
 . ${HOME}/.mikanos.toolchain_path
 
