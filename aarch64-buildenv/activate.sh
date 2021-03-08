@@ -39,6 +39,7 @@ function deactivate () {
     unset PYTHONHASHSEED
     unset SYSROOT
     unset WORKSPACE
+    unset MIKANOS_BUILDENV_ACTIVATED
 }
 
 function bear_wrapper () {
@@ -52,7 +53,7 @@ function bear_wrapper () {
 
 # check re-activation
 
-if [[ -n "${ORIG_PS1}" || -n "${ORIG_PROMPT}" ]] ; then
+if [[ -n "${MIKANOS_BUILDENV_ACTIVATED}" ]] ; then
     echo 're-activate'
     deactivate
 fi
@@ -84,6 +85,7 @@ esac
 
 # misc
 
+MIKANOS_BUILDENV_ACTIVATED=1
 ORIG_PATH=${PATH}
 export PATH=${ORIG_PATH}:${SCRIPT_DIR}/osbook/devenv/
 export MIKANOS_COMPILEDB=${SCRIPT_DIR}/mikanos/compile_commands.json
