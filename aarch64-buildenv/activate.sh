@@ -20,9 +20,12 @@ function deactivate () {
         *bash* )
             PS1=${ORIG_PS1}
             PROMPT_COMMAND=${ORIG_PROMPT_COMMAND}
+            unset ORIG_PS1
+            unset ORIG_PROMPT_COMMAND
             ;;
         *zsh* )
             PROMPT=${ORIG_PROMPT}
+            unset ORIG_PROMPT
             ;;
     esac
     unset CLANG_TARGET

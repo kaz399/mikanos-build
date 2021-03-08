@@ -72,10 +72,10 @@ mkdir -p "${DEVENV_DIR}"
 
 if [[ ! -d "clang+llvm-11.0.0-aarch64-linux-gnu" ]] ; then
     tar xvf "${DOWNLOAD_DIR}"/clang+llvm-11.0.0-aarch64-linux-gnu.tar.xz
+fi
     cd "${WORKDIR}"/clang+llvm-11.0.0-aarch64-linux-gnu
     cp -vr * "${DEVENV_DIR}"
     cd "${WORKDIR}"
-fi
 
 if [[ ! -d "${TOOLCHAIN_DIR}/aarch64-linux-gnu" ]] ; then
     if [[ ! -d "gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu" ]] ; then
