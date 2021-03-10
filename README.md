@@ -8,8 +8,33 @@ Ubuntu20.10で動作確認をしています。
 
 ## ビルド環境の構築
 
+作業ディレクトリを作成ます。
+作業ディレクトリに移りこのリポジトリをクローンします。
 ビルドスクリプトを実行します。
+作業ディレクトリに開発環境一式が構築されます。
 
+```:bash
+mkdir aarch64-mikanos
+cd aarch64-mikanos
+git clone https://github.com/kaz399/mikanos-build.git osbook
+cd osbook/aarch64-buildenv
+./bootstrap.sh
+```
 
+正しく終了すると下記のような構成になります。
 
-
+```
+aarch64-mikanos
+ ├── aarch64-linux-gnu -> gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu
+ ├── activate.sh
+ ├── bootstrap.sh
+ ├── clang+llvm-11.0.0-aarch64-linux-gnu
+ ├── downloads
+ ├── edk2
+ ├── freetype2
+ ├── gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu
+ ├── mikanos
+ ├── musl
+ ├── osbook
+ └── seabios
+```
