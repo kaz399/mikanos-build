@@ -104,13 +104,6 @@ alias cdr="cd ${SCRIPT_DIR}"
 
 \pushd . > /dev/null
 
-if [ -s "${HOME}/.mikanos.toolchain_path" ] ; then
-    echo "source toolchain definition"
-    source ${HOME}/.mikanos.toolchain_path
-else
-    ls -al "${HOME}/.mianos.toolchain_path"
-fi
-
 \cd ${SCRIPT_DIR}/edk2
 source ./edksetup.sh
 \cd ${SCRIPT_DIR}/osbook
