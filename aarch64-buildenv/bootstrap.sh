@@ -123,7 +123,7 @@ make -j${CPUS} install
 # edk2
 
 cd "${WORKDIR}/edk2"
-if [ -n "${WORKSPACE}" ] ; then
+if [ -n "${WORKSPACE:-}" ] ; then
     unset WORKSPACE
 fi
 git clean -dfx
