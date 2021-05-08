@@ -81,7 +81,7 @@ fi
 cd "${WORKDIR}/clang+llvm-11.0.0-aarch64-linux-gnu"
 cp -vr * "${DEVENV_DIR}"
 
-if [[ ! -d "${WORKDIR}/aarch64-linux-gnu" ]] ; then
+if [[ ! -e "${WORKDIR}/aarch64-linux-gnu" ]] ; then
     if [[ ! -d "gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu" ]] ; then
         tar xvf "${DOWNLOAD_DIR}/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu.tar.xz" -C "${WORKDIR}"
         cd "${WORKDIR}"
@@ -144,7 +144,9 @@ dd if="${WORKDIR}/edk2/Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU
 dd if=/dev/zero of="${DEVENV_DIR}/OVMF_VARS.fd" bs=1M count=64
 dd if="${WORKDIR}/edk2//Build/ArmVirtQemu-AARCH64/DEBUG_${BUILD_COMPILER}/FV/QEMU_VARS.fd" of="${DEVENV_DIR}/OVMF_VARS.fd" conv=notrunc
 
-ln -s ../mikanos/MikanLoaderPkg .
+if [[ ! -e MikanLoaderPkg ]] ; then
+    ln -s ../mikanos/MikanLoaderPkg .
+fi
 
 # seabios
 
